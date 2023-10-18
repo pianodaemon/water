@@ -44,6 +44,14 @@ class RPi3BPlusGpio(PsGen):
            kwargs.get('gpio_noc', self.OUTLET_ON)
         )
 
+        # Set up GPIO mode and initial state
+        gpio_mode = GPIO.getmode()
+        if gpio_mode == GPIO.BCM:
+            self.logger.debug("GPIO mode is set to BCM (Broadcom SOC channel) numbering")
+        else:
+            GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.__gpio_conf['GPIO_PIN'], GPIO.OUT)
+
     def turn_outlet_off(self, outlet_number):
         """Turns a specified outlet off in cutter device"""
         self.__verify_outlet_range(outlet_number)
@@ -85,10 +93,6 @@ class RPi3BPlusGpio(PsGen):
                 outlet_number))
         return i_onum
 
-
-# Set up GPIO mode and initial state
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(self.__gpio_conf['GPIO_PIN'], GPIO.OUT)
 
 try:
     while True:
