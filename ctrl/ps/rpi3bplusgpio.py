@@ -44,6 +44,28 @@ class RPi3BPlusGpio(PsGen):
            kwargs.get('gpio_noc', self.OUTLET_ON)
         )
 
+    def turn_outlet_off(self, outlet_number):
+        """Turns a specified outlet off in cutter device"""
+        self.__verify_outlet_range(outlet_number)
+        self.__act_upon_outlet(self.__gpio_conf['GPIO_CUTTER_OFF'])
+
+    def turn_outlet_on(self, outlet_number):
+        """Turns a specified outlet on in cutter device"""
+        self.__verify_outlet_range(outlet_number)
+        self.__act_upon_outlet(self.__gpio_conf['GPIO_CUTTER_ON'])
+
+    def turn_all_outlets_on(self):
+        """Turns all outlets on in cutter device."""
+        self.__act_upon_outlet(self.__gpio_conf['GPIO_CUTTER_ON'])
+
+    def turn_all_outlets_off(self):
+        """Turns all outlets off in cutter device."""
+        self.__act_upon_outlet(self.__gpio_conf['GPIO_CUTTER_OFF'])
+
+    def read_outlet(self, outlet_number):
+        """Reads the requested outlet from cutter device"""
+        return self.read_all_outlets()[self.__verify_outlet_range(outlet_number)]
+
 
 # Set up GPIO mode and initial state
 GPIO.setmode(GPIO.BCM)
