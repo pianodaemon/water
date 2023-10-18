@@ -37,7 +37,7 @@ class BBBGpio(PsGen):
         }
 
         if not self.__gpio_conf['GPIO_PIN']:
-            raise PsError('gpio pin has not been defined')
+            raise PsHwError('gpio pin has not been defined')
 
         self.__gpio_conf['GPIO_CUTTER_ON'], self.__gpio_conf['GPIO_CUTTER_OFF'] = det_noc(
            kwargs.get('gpio_noc', self.OUTLET_ON)
