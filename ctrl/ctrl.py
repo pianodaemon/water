@@ -3,7 +3,7 @@ import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "ps")))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "kb")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "hc")))
 
 class CtrlError(Exception):
     def __init__(self, message = None):
