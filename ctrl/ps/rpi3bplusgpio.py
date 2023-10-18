@@ -21,6 +21,14 @@ class RPi3BPlusGpio(PsGen):
 
         super().__init__(logger, self.__SLOT_MAX)
 
+        # Verifies GPIO mode
+        gpio_mode = GPIO.getmode()
+        if gpio_mode != GPIO.BCM:
+            emsg = 'GPIO mode must have been previously set to BCM (Broadcom SOC channel)'
+            raise PsHwError(emsg)
+
+        self.logger.debug("GPIO mode set to BCM (Broadcom SOC channel)")
+
         def det_noc(v):
             if v == self.OUTLET_ON:
                 return (self.OUTLET_OFF, self.OUTLET_ON)
@@ -44,12 +52,7 @@ class RPi3BPlusGpio(PsGen):
            kwargs.get('gpio_noc', self.OUTLET_ON)
         )
 
-        # Set up GPIO mode and initial state
-        gpio_mode = GPIO.getmode()
-        if gpio_mode == GPIO.BCM:
-            self.logger.debug("GPIO mode is set to BCM (Broadcom SOC channel) numbering")
-        else:
-            GPIO.setmode(GPIO.BCM)
+        # Setup GPIO pin as output
         GPIO.setup(self.__gpio_conf['GPIO_PIN'], GPIO.OUT)
 
     def turn_outlet_off(self, outlet_number):
@@ -93,20 +96,15 @@ class RPi3BPlusGpio(PsGen):
                 outlet_number))
         return i_onum
 
-
-try:
-    while True:
-        # Turn the relay on
-        GPIO.output(self.__gpio_conf['GPIO_PIN'], GPIO.HIGH)
-        print("Relay is ON")
-        time.sleep(2)  # Keep the relay on for 2 seconds
-
-        # Turn the relay off
-        GPIO.output(self.__gpio_conf['GPIO_PIN'], GPIO.LOW)
-        print("Relay is OFF")
-        time.sleep(2)  # Keep the relay off for 2 seconds
-
-except KeyboardInterrupt:
-    print("Program terminated by user")
-finally:
-    GPIO.cleanup()  # Cleanup GPIO settings
+    def __act_upon_outlet(self, state):
+        """
+        set GPIO pin to state
+        """
+        switcher = (
+            (lambda pin: GPIO.output(pin, GPIO.HIGH)),
+            (lambda pin: GPIO.output(pin, GPIO.LOW))
+        )
+        st = int(state)
+        if st < 0:
+            raise PsOutletError("There is not any negative gpio state")
+        switcher[st](self.__gpio_conf['GPIO_PIN'])
