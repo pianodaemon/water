@@ -123,10 +123,8 @@ class BBBGpio(PsGen):
             (lambda f: f.write('1'))
         ]
         st = int(state)
-
         if st < 0:
             raise PsOutletError("There is not any negative gpio state")
-
         fd = self.__open_virt_file(writeable=True)
         switcher[st](fd)
         fd.close()
