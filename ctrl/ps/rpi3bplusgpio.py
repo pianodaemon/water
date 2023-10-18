@@ -7,7 +7,6 @@ import RPi.GPIO as GPIO
 from ctrl.gen import PsGen
 from ctrl.gen import PsHwError, PsOutletError
 
-
 impt_class='RPi3BPlusGpio'
 
 class RPi3BPlusGpio(PsGen):
