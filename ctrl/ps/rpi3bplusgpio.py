@@ -66,6 +66,25 @@ class RPi3BPlusGpio(PsGen):
         """Reads the requested outlet from cutter device"""
         return self.read_all_outlets()[self.__verify_outlet_range(outlet_number)]
 
+    def read_all_outlets(self):
+        """Reads all outlets from cutter device."""
+        _UNIQUE_SLOT_INDEX = 1
+        gpio_val = 1 if GPIO.input(self.__gpio_conf['GPIO_PIN']) == GPIO.HIGH else 0
+        return {_UNIQUE_SLOT_INDEX: "{}".format(gpio_val)}
+
+    def __verify_outlet_range(self, outlet_number):
+        i_onum = None
+        try:
+            i_onum = int(outlet_number)
+        except ValueError as e:
+            self.logger.debug(e)
+            msg = "incorrect type of outlet indexing, expecting an int"
+            raise PsOutletError(msg)
+        if i_onum < 1 or i_onum > self.outlet_count:
+            raise PsOutletError("requested outlet {0} is out of range".format(
+                outlet_number))
+        return i_onum
+
 
 # Set up GPIO mode and initial state
 GPIO.setmode(GPIO.BCM)
