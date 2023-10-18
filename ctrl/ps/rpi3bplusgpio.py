@@ -34,9 +34,7 @@ class RPi3BPlusGpio(PsGen):
             if v == self.OUTLET_OFF:
                 return (self.OUTLET_ON, self.OUTLET_OFF)
 
-            raise PsHwError(
-                'It was not possible to determine relay behaviour'
-            )
+            raise PsHwError('It was not possible to determine relay behaviour')
 
         self.__gpio_conf = {
             'GPIO_PIN': kwargs.get('gpio_pin', None),
@@ -45,7 +43,7 @@ class RPi3BPlusGpio(PsGen):
         }
 
         if not self.__gpio_conf['GPIO_PIN']:
-            raise PsError('gpio pin has not been defined')
+            raise PsHwError('gpio pin has not been defined')
 
         self.__gpio_conf['GPIO_CUTTER_ON'], self.__gpio_conf['GPIO_CUTTER_OFF'] = det_noc(
            kwargs.get('gpio_noc', self.OUTLET_ON)
