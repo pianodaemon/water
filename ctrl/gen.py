@@ -2,7 +2,10 @@ from abc import ABCMeta, abstractmethod
 from ctrl.ctrl import CtrlError
 
 class HcGen(metaclass=ABCMeta):
-
+    """
+    Coin hopper controller base class.
+    """
+    def __init__(self, logger):
 
 class PsGen(metaclass=ABCMeta):
     """
