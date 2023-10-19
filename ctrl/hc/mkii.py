@@ -34,7 +34,7 @@ class MkII(HcGen):
         GPIO.setup(self._gpio_pin, GPIO.OUT)
 
     def dispense(self, quantity):
-        """Dispenses a quantity of coins"""
+        '''Dispenses a quantity of coins'''
         for _ in range(quantity):
             self._falling_edge_pulse(self._gpio_pin)
 
