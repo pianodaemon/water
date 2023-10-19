@@ -1,19 +1,11 @@
-import RPi.GPIO as GPIO
-import time
-
-# Set the GPIO mode to BCM
-GPIO.setmode(GPIO.BCM)
-
-# Define the GPIO pin for output
-output_pin = 18
-
-from ctrl.gen import HcGen
-from ctrl.gen import HcHwError, HcOutletError
-
 import struct
 import time
 import logging
 import os
+import RPi.GPIO as GPIO
+
+from ctrl.gen import HcGen
+from ctrl.gen import HcHwError
 
 impt_class='MkII'
 
@@ -41,11 +33,12 @@ class MkII(HcGen):
         # Set up the GPIO pin as an output
         GPIO.setup(self._gpio_pin, GPIO.OUT)
 
-    def _falling_edge_pulse(self):
+    @classmethod
+    def _falling_edge_pulse(cls, output_pin):
         '''Generates a falling edge pulse'''
         GPIO.output(output_pin, GPIO.HIGH)
-        time.sleep(__INTERVAL_MS)  # Ensure at least 5 ms pulse duration
+        time.sleep(cls.__INTERVAL_MS)  # Ensure pulse duration
         GPIO.output(output_pin, GPIO.LOW)
         
-        # Wait for at least 5 ms before generating the next pulse
-        time.sleep(__INTERVAL_MS)
+        # Wait before generating the next pulse
+        time.sleep(cls__INTERVAL_MS)
