@@ -1,0 +1,28 @@
+{
+   "mimic_profile": {
+      "ctrl": {
+         "hc": {
+             "selected": {
+                "mod_params": [
+                   {
+                      "name": "gpio_pin",
+                      "value": "16"
+                   }
+                ],
+                "mod_name": "mkii"
+             }
+         },
+         "ps": {
+             "selected": {
+                "mod_params": [
+                   {
+                      "name": "gpio_pin",
+                      "value": "18"
+                   }
+                ],
+                "mod_name": "rpi3bplusgpio"
+             }
+         }
+      }
+   }
+}
