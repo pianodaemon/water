@@ -4,6 +4,9 @@ from ctrl.ctrl import CtrlError
 class HcGen(metaclass=ABCMeta):
     """
     Coin hopper controller base class.
+
+    Defines the standard methods for coupling the main module to
+    the hardware.
     """
     def __init__(self, logger):
 
