@@ -9,6 +9,18 @@ class HcGen(metaclass=ABCMeta):
     the hardware.
     """
     def __init__(self, logger):
+        pass
+
+    @abstractmethod
+    def dispense(self, quantity):
+        '''Dispenses a quantity of coins'''
+
+
+class HcHwError(CtrlError):
+    def __init__(self, message = None, module = None):
+        self.HW_module = module
+        super().__init__(message = message)
+
 
 class PsGen(metaclass=ABCMeta):
     """
