@@ -8,7 +8,6 @@ class PsGen(metaclass=ABCMeta):
     Defines the standard methods for coupling the main module to
     the hardware.
     """
-
     OUTLET_ON = '1'
     OUTLET_OFF = '0'
 
