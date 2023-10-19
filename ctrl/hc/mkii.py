@@ -35,7 +35,7 @@ class MkII(HcGen):
 
     def dispense(self, quantity):
         """Dispenses a quantity of coins"""
-        for i in range(quantity):
+        for _ in range(quantity):
             self._falling_edge_pulse(self._gpio_pin)
 
     @classmethod
