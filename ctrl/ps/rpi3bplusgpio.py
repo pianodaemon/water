@@ -13,7 +13,6 @@ class RPi3BPlusGpio(PsGen):
     """
     Control class for a Raspberry PI 3 (model B+) gpio relay
     """
-
     __SLOT_MAX = 1
 
     def __init__(self, logger, *args, **kwargs):
@@ -98,8 +97,8 @@ class RPi3BPlusGpio(PsGen):
         set GPIO pin to state
         """
         switcher = (
-            (lambda pin: GPIO.output(pin, GPIO.HIGH)),
-            (lambda pin: GPIO.output(pin, GPIO.LOW))
+            (lambda pin: GPIO.output(pin, GPIO.LOW)),
+            (lambda pin: GPIO.output(pin, GPIO.HIGH))
         )
         st = int(state)
         if st < 0:
