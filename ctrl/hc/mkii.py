@@ -22,7 +22,7 @@ class MkII(HcGen):
         gpio_mode = GPIO.getmode()
         if gpio_mode != GPIO.BCM:
             emsg = 'GPIO mode must have been previously set to BCM (Broadcom SOC channel)'
-            raise PsHwError(emsg)
+            raise HcHwError(emsg)
 
         self.logger.debug("GPIO mode set to BCM (Broadcom SOC channel)")
 
