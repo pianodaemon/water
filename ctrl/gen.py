@@ -13,7 +13,7 @@ class HcGen(metaclass=ABCMeta):
 
     @abstractmethod
     def dispense(self, quantity):
-        '''Dispenses a quantity of coins'''
+        """ Dispenses a quantity of coins """
 
 
 class HcHwError(CtrlError):
