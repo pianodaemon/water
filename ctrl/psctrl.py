@@ -28,30 +28,25 @@ class PsCtrl(Ctrl):
     def turn_outlet_on(self, outlet_number):
         """turns a single power switch outlet on."""
         self.logger.debug(
-            "asking the PS handler to turn {0} outlet on".format(
-                outlet_number)
+            "asking the PS handler to turn {0} outlet on".format(outlet_number)
         )
         self.model.turn_outlet_on(outlet_number)
 
     def turn_outlet_off(self, outlet_number):
         """turns a single power switch outlet off."""
         self.logger.debug(
-            "asking the PS handler to turn {0} outlet off".format(
-                outlet_number)
+            "asking the PS handler to turn {0} outlet off".format(outlet_number)
         )
         self.model.turn_outlet_off(outlet_number)
 
     def read_all_outlets(self):
         """reads all the power switch outlets."""
-        self.logger.debug(
-            "asking the PS handler to read all outlets"
-        )
+        self.logger.debug("asking the PS handler to read all outlets")
         return self.model.read_all_outlets()
 
     def read_outlet(self, outlet_number):
         """reads a single power switch outlet."""
         self.logger.debug(
-            "asking the PS handler to read {0} outlet".format(
-                outlet_number)
-            )
+            "asking the PS handler to read {0} outlet".format(outlet_number)
+        )
         return self.model.read_outlet(outlet_number)
