@@ -97,8 +97,7 @@ class Np0801dt(PsGen):
                 rv['temp'] = values[3]
                 return rv
         elif values[0] == '$AF':
-            raise PsHwError("RPS returned error code: {0}".format(
-                values[0]))
+            raise PsHwError("RPS returned error code: {0}".format(values[0]))
         else:
             raise PsHwError("RPS unknown error")
 
@@ -111,8 +110,7 @@ class Np0801dt(PsGen):
             msg = "incorrect type of outlet indexing, expecting an int"
             raise PsOutletError(msg)
         if i_onum < 1 or i_onum > self.outlet_count:
-            raise PsOutletError("requested outlet {0} is out of range".format(
-                outlet_number))
+            raise PsOutletError("requested outlet {0} is out of range".format(outlet_number))
         return self.read_all_outlets()[i_onum]
 
 
@@ -134,8 +132,7 @@ class Np0801dt(PsGen):
                 # npd0801dt indexing is from 1 to 8 so +1 here
                 d_outlet_status[si + 1] = status
 
-            self.logger.debug("parsed outlet status: {0}".format(
-                d_outlet_status))
+            self.logger.debug("parsed outlet status: {0}".format(d_outlet_status))
             return d_outlet_status
         except (PsHwError, PsOutletError):
             raise
@@ -145,8 +142,7 @@ class Np0801dt(PsGen):
         action = self.__ACTIONS['AlterSlot']
         i_onum = int(outlet_number)
         if not i_onum or i_onum > self.outlet_count:
-            raise PsOutletError("requested outlet {0} is out of range".format(
-                outlet_number))
+            raise PsOutletError("requested outlet {0} is out of range".format(outlet_number))
         try:
             reply = self.__exec_inst(
                 action['inst_code'], action['breathe_time'],
@@ -154,8 +150,7 @@ class Np0801dt(PsGen):
             if reply == self.__FAIL_CODE:
                 self.logger.fatal("RPS returned fail code on cmd {0}", format(
                     action['inst_code']))
-                raise PsOutletError("RPS failed when turn outlet {0} on".format(
-                    outlet_number))
+                raise PsOutletError("RPS failed when turn outlet {0} on".format(outlet_number))
         except (PsHwError, PsOutletError):
             raise
 
@@ -165,8 +160,7 @@ class Np0801dt(PsGen):
         action = self.__ACTIONS['AlterSlot']
         i_onum = int(outlet_number)
         if not i_onum or i_onum > self.outlet_count:
-            raise PsOutletError("requested outlet {0} is out of range".format(
-                outlet_number))
+            raise PsOutletError("requested outlet {0} is out of range".format(outlet_number))
         try:
             reply = self.__exec_inst(
                 action['inst_code'], action['breathe_time'],
@@ -174,8 +168,7 @@ class Np0801dt(PsGen):
             if reply == self.__FAIL_CODE:
                 self.logger.fatal("RPS returned fail code on cmd {0}", format(
                     action['inst_code']))
-                raise PsOutletError(
-                        "RPS failed turn outlet {0} off".format(outlet_number))
+                raise PsOutletError("RPS failed turn outlet {0} off".format(outlet_number))
         except (PsHwError, PsOutletError):
             raise
 
