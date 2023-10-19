@@ -31,8 +31,12 @@ class MkII(HcGen):
             raise PsHwError(emsg)
 
         self.logger.debug("GPIO mode set to BCM (Broadcom SOC channel)")
+
+        gpio_pin = kwargs.get('gpio_pin', None)
+        if not gpio_pin:
+            raise HcHwError('gpio pin has not been defined')
+
         self.__gpio_conf = {
-            'GPIO_PIN': kwargs.get('gpio_pin', None),
             'GPIO_CUTTER_ON': None,
             'GPIO_CUTTER_OFF': None
         }
