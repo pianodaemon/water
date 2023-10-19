@@ -1,6 +1,9 @@
 from abc import ABCMeta, abstractmethod
 from ctrl.ctrl import CtrlError
 
+class HcGen(metaclass=ABCMeta):
+
+
 class PsGen(metaclass=ABCMeta):
     """
     Power switch controller base class.
