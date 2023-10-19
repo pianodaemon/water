@@ -21,6 +21,8 @@ class MkII(HcGen):
     """
     Control class for a coin hopper 1984
     """
+    __INTERVAL_MS = 0.005
+
     def __init__(self, logger, *args, **kwargs):
         super().__init__(logger)
 
@@ -32,30 +34,18 @@ class MkII(HcGen):
 
         self.logger.debug("GPIO mode set to BCM (Broadcom SOC channel)")
 
-        gpio_pin = kwargs.get('gpio_pin', None)
-        if not gpio_pin:
+        self._gpio_pin = kwargs.get('gpio_pin', None)
+        if not self._gpio_pin:
             raise HcHwError('gpio pin has not been defined')
 
-        self.__gpio_conf = {
-            'GPIO_CUTTER_ON': None,
-            'GPIO_CUTTER_OFF': None
-        }
-# Set up the GPIO pin as an output
-GPIO.setup(output_pin, GPIO.OUT)
+        # Set up the GPIO pin as an output
+        GPIO.setup(self._gpio_pin, GPIO.OUT)
 
-try:
-    while True:
-        # Generate a falling edge pulse
+    def _falling_edge_pulse(self):
+        '''Generates a falling edge pulse'''
         GPIO.output(output_pin, GPIO.HIGH)
-        time.sleep(0.005)  # Ensure at least 5 ms pulse duration
+        time.sleep(__INTERVAL_MS)  # Ensure at least 5 ms pulse duration
         GPIO.output(output_pin, GPIO.LOW)
         
         # Wait for at least 5 ms before generating the next pulse
-        time.sleep(0.005)
-
-except KeyboardInterrupt:
-    pass
-
-finally:
-    # Cleanup GPIO settings
-    GPIO.cleanup()
+        time.sleep(__INTERVAL_MS)
