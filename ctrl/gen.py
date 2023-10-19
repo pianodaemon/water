@@ -9,7 +9,7 @@ class HcGen(metaclass=ABCMeta):
     the hardware.
     """
     def __init__(self, logger):
-        pass
+        self.logger = logger
 
     @abstractmethod
     def dispense(self, quantity):
