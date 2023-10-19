@@ -21,7 +21,6 @@ class Ctrl(object):
     """
     Emulator control class.
     """
-    
     def __init__(self, logger, ctrl_info=None):
         self.logger = logger
 
