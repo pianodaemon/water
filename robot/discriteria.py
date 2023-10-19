@@ -2,9 +2,17 @@
 class DispenserCriteria(object):
     '''Greedy algorithm to find minimum number of coins'''
 
-    def __init__(self, **denominations):
-        self._denominations = denominations
-        self._coins = sorted([int(deno) for deno, handler in denominations.items()])
+    __COIN_DENO, __COIN_HANDLER = range(2)
+
+    def __init__(self, *denominations):
+        self._denominations = dict([])
+        self._coins = list([])
+        for deno in denominations:
+            if type(deno) is not tuple:
+                raise Exception("The expectation is an array of tuples as denominations")
+            self._coins.append(deno[self.__COIN_DENO])
+            self._denominations[deno[self.__COIN_DENO]] = deno[self.__COIN_HANDLER]
+        self._coins = sorted(self._coins)
 
     def min_coin_ex(self, amount):
         '''Devise the minimum number of denominations'''
@@ -15,5 +23,5 @@ class DispenserCriteria(object):
             # Find denominations
             while (amount >= self._coins[offset]):
                 amount -= self._coins[offset]
-                self._denominations[str(self._coins[offset])]()
+                self._denominations[self._coins[offset]]()
             offset -= 1
