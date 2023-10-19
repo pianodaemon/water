@@ -7,6 +7,23 @@ GPIO.setmode(GPIO.BCM)
 # Define the GPIO pin for output
 output_pin = 18
 
+from ctrl.gen import PsGen
+from ctrl.gen import PsHwError, PsOutletError
+
+import struct
+import time
+import logging
+import os
+
+impt_class='MkII'
+
+class MkII(HcGen):
+    """
+    Control class for a coin hopper 1984
+    """
+    def __init__(self, logger, *args, **kwargs):
+        super().__init__(logger)
+
 # Set up the GPIO pin as an output
 GPIO.setup(output_pin, GPIO.OUT)
 
