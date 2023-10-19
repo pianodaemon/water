@@ -7,7 +7,6 @@ class PsCtrl(Ctrl):
     """
     Power switch control class.
     """
-
     def __init__(self, logger, ctrl_info=None):
         super().__init__(logger, ctrl_info)
 
