@@ -39,6 +39,4 @@ class MkII(HcGen):
         GPIO.output(output_pin, GPIO.HIGH)
         time.sleep(cls.__INTERVAL_MS)  # Ensure pulse duration
         GPIO.output(output_pin, GPIO.LOW)
-        
-        # Wait before generating the next pulse
-        time.sleep(cls__INTERVAL_MS)
+        time.sleep(cls.__INTERVAL_MS)   # Wait before generating the next pulse
