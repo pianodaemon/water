@@ -7,8 +7,8 @@ GPIO.setmode(GPIO.BCM)
 # Define the GPIO pin for output
 output_pin = 18
 
-from ctrl.gen import PsGen
-from ctrl.gen import PsHwError, PsOutletError
+from ctrl.gen import HcGen
+from ctrl.gen import HcHwError, HcOutletError
 
 import struct
 import time
@@ -24,6 +24,13 @@ class MkII(HcGen):
     def __init__(self, logger, *args, **kwargs):
         super().__init__(logger)
 
+        # Verifies GPIO mode
+        gpio_mode = GPIO.getmode()
+        if gpio_mode != GPIO.BCM:
+            emsg = 'GPIO mode must have been previously set to BCM (Broadcom SOC channel)'
+            raise PsHwError(emsg)
+
+        self.logger.debug("GPIO mode set to BCM (Broadcom SOC channel)")
 # Set up the GPIO pin as an output
 GPIO.setup(output_pin, GPIO.OUT)
 
