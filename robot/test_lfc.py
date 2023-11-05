@@ -1,9 +1,9 @@
 from unittest import TestCase
-from .rinse import RinseCycle
+from .lfc import LiquidFlowCycle
 import time
 
 
-class TestRinseCycle(TestCase):
+class TestLiquidFlowCycle(TestCase):
 
     def test_happy_path(self):
         '''The rinse cycle is never interrupted'''
@@ -15,7 +15,7 @@ class TestRinseCycle(TestCase):
 
         # During three seconds the water shall flow
         interval = 3
-        with RinseCycle(interval, open_handler, close_handler) as rflow:
+        with LiquidFlowCycle(interval, open_handler, close_handler) as rflow:
             start_time = time.time()
         stop_time = time.time()
         # It shall truncate decimal part

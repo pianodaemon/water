@@ -1,6 +1,6 @@
 import time
 
-class RinseCycle(object):
+class LiquidFlowCycle(object):
 
     __SENTINEL_INTERVAL_MS = 0.05
 
