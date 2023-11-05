@@ -1,7 +1,7 @@
 import time
 
-class LiquidFlowCycle(object):
-
+class FlowGateCycle(object):
+    ''''''
     __SENTINEL_INTERVAL_MS = 0.05
 
     def __init__(self, interval, open_handler, close_handler):

@@ -1,9 +1,8 @@
 from unittest import TestCase
-from .lfc import LiquidFlowCycle
+from .lfc import FlowGateCycle
 import time
 
-
-class TestLiquidFlowCycle(TestCase):
+class TestFlowGateCycle(TestCase):
 
     def test_happy_path(self):
         '''The cycle is never interrupted'''
@@ -15,7 +14,7 @@ class TestLiquidFlowCycle(TestCase):
 
         # During three seconds the liquid shall flow
         interval = 3
-        with LiquidFlowCycle(interval, open_handler, close_handler) as rflow:
+        with FlowGateCycle(interval, open_handler, close_handler) as rflow:
             start_time = time.time()
         stop_time = time.time()
         # It shall truncate decimal part
