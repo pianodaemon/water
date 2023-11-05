@@ -1,6 +1,6 @@
 import time
 
-class RinseCtxMgr(object):
+class RinseCycle(object):
 
     __SENTINEL_INTERVAL_MS = 0.05
 
