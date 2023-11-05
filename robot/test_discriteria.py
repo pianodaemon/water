@@ -11,6 +11,7 @@ class TestDispenserCriteria(TestCase):
     _FITHTY_WOOLONG = 50
 
     def test_two_deno(self):
+        '''Test for an implementation featuring two coin hoppers'''
         exchange_collected = []
         # Each handler mocks an enabled coin hopper
         def one():
@@ -34,6 +35,7 @@ class TestDispenserCriteria(TestCase):
         self.assertTrue(exchange_expected == exchange_collected)
 
     def test_six_deno(self):
+        '''Test for an implementation featuring six coin hoppers'''
         exchange_collected = []
         # Each handler mocks an enabled coin hopper
         def one():
