@@ -1,7 +1,8 @@
 import time
 
 class FlowGateCycle(object):
-    ''''''
+    '''Perform the flow gate cycle'''
+
     __SENTINEL_INTERVAL_MS = 0.05
 
     def __init__(self, interval, open_handler, close_handler):
