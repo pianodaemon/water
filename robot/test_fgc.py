@@ -1,5 +1,5 @@
 from unittest import TestCase
-from .lfc import FlowGateCycle
+from .fgc import FlowGateCycle
 import time
 
 class TestFlowGateCycle(TestCase):
