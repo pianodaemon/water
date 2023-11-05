@@ -6,14 +6,14 @@ import time
 class TestLiquidFlowCycle(TestCase):
 
     def test_happy_path(self):
-        '''The rinse cycle is never interrupted'''
+        '''The cycle is never interrupted'''
         start_time, stop_time = 0, 0
         def open_handler():
             pass
         def close_handler():
             pass
 
-        # During three seconds the water shall flow
+        # During three seconds the liquid shall flow
         interval = 3
         with LiquidFlowCycle(interval, open_handler, close_handler) as rflow:
             start_time = time.time()
