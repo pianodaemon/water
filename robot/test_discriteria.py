@@ -12,11 +12,13 @@ class TestDispenserCriteria(TestCase):
 
     def test_two_deno(self):
         exchange_collected = []
+        # Each handler mocks an enabled coin hopper
         def one():
             exchange_collected.append(TestDispenserCriteria._ONE_WOOLONG)
         def two():
             exchange_collected.append(TestDispenserCriteria._TWO_WOOLONG)
 
+        # The exchange's distribution that shall be received by the client
         exchange_expected = [
             TestDispenserCriteria._TWO_WOOLONG,
             TestDispenserCriteria._TWO_WOOLONG,
@@ -26,12 +28,14 @@ class TestDispenserCriteria(TestCase):
         dispenser = DispenserCriteria(
             (TestDispenserCriteria._ONE_WOOLONG, one),
             (TestDispenserCriteria._TWO_WOOLONG, two))
+
         # It'll dispense 5 woolongs as exchange
         dispenser(sum(exchange_expected))
         self.assertTrue(exchange_expected == exchange_collected)
 
     def test_six_deno(self):
         exchange_collected = []
+        # Each handler mocks an enabled coin hopper
         def one():
             exchange_collected.append(TestDispenserCriteria._ONE_WOOLONG)
         def two():
@@ -44,6 +48,8 @@ class TestDispenserCriteria(TestCase):
             exchange_collected.append(TestDispenserCriteria._TWENTY_WOOLONG)
         def fithy():
             exchange_collected.append(TestDispenserCriteria._FITHTY_WOOLONG)
+
+        # The exchange's distribution that shall be received by the client
         exchange_expected = [
                 TestDispenserCriteria._FITHTY_WOOLONG,
                 TestDispenserCriteria._TWENTY_WOOLONG,
@@ -51,6 +57,7 @@ class TestDispenserCriteria(TestCase):
                 TestDispenserCriteria._TWO_WOOLONG,
                 TestDispenserCriteria._ONE_WOOLONG
         ]
+
         dispenser = DispenserCriteria(
             (TestDispenserCriteria._ONE_WOOLONG, one),
             (TestDispenserCriteria._TWO_WOOLONG, two),
@@ -58,6 +65,7 @@ class TestDispenserCriteria(TestCase):
             (TestDispenserCriteria._TEN_WOOLONG, ten),
             (TestDispenserCriteria._TWENTY_WOOLONG, twenty),
             (TestDispenserCriteria._FITHTY_WOOLONG, fithy))
+
         # It'll dispense 93 woolongs as exchange
         dispenser(sum(exchange_expected))
         self.assertTrue(exchange_expected == exchange_collected)
