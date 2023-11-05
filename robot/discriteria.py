@@ -14,7 +14,7 @@ class DispenserCriteria(object):
             self._denominations[deno[self.__COIN_DENO]] = deno[self.__COIN_HANDLER]
         self._coins = sorted(self._coins)
 
-    def min_coin_ex(self, amount):
+    def __call__(self, amount):
         '''Devise the minimum number of denominations'''
         n = len(self._coins)
         # Traverse through all denomination
