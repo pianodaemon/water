@@ -1,6 +1,7 @@
 import time
 
-class RinseCtxMgr(object):
+class FlowGateCycle(object):
+    '''Perform the flow gate cycle'''
 
     __SENTINEL_INTERVAL_MS = 0.05
 
