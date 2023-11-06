@@ -12,7 +12,7 @@ class TestFlowGateCycle(TestCase):
         q.put(None)
 
     def test_stop_cycle(self):
-        '''The cycle is never interrupted'''
+        '''The cycle is interrupted'''
         stop_queue = mp.Queue(1)
         def og_callback():
             pass
