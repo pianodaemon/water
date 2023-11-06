@@ -46,7 +46,7 @@ class FlowGateCycle(object):
 
     @classmethod
     def sluice(cls, stop_queue, interval, og_callback, cg_callback):
-        delta = mp.Value('f', 0.0)
+        delta = mp.Value('f', 0.0) # to store unix epoch time as a floating point
         proc = mp.Process(
                 target=cls._cycle_process,
                 args=(stop_queue, interval, og_callback, cg_callback, delta))
